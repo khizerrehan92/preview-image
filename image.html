@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Preview File</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="stylesheet" href="./styles.css">
+
+    </head>
+    <body>
+     
+        <h1>Image Preview</h1>
+        <input type="file" name="uploadFile" id="uploadFile" />
+        <div class="image-preview" id="imagePreview">
+          <img src="" alt="Image Preview" class="image-preview__image" />
+          <span class="image-preview__default-text">Image Preview</span>
+        </div>
+        
+    </body>
+
+
+    <script type="text/javascript">
+
+      var inputFile = document.getElementById('uploadFile');
+      var previewContainer = document.getElementById('imagePreview');
+      var previewImage = previewContainer.querySelector('.image-preview__image')
+      var previewDefaultText = previewContainer.querySelector('.image-preview__default-text');
+
+
+      inputFile.addEventListener('change', function(e){
+    
+        const file = e.target.files[0];
+        console.table(file);
+        
+        if(file) {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            previewDefaultText.style.display = "none";
+            previewImage.style.display="block";
+            fileReader.addEventListener("load", function (e) {
+                // convert image file to base64 string
+                previewImage.src = fileReader.result;
+            }, false);
+        }
+        else {
+            // null means use default css values here
+            debugger;
+            previewDefaultText.style.display = null;
+            previewImage.style.display= null;
+        }
+      });
+
+
+    </script>
+</html>
